@@ -16,6 +16,7 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="product_management.css" />
     <title>Melbourne Watch Gallery</title>
   </head>
   <body>
@@ -68,14 +69,55 @@
       <h1>Melbourne Watch Gallery</h1>
     </div>
 
-    <div class="m-5">
-      <h3>
-        Melbourne Watch Gallery is a retail company that sells smartwatches and
-        sports trackers. Melbourne Watch Gallery has stores in major Melbourne
-        and Sydney shopping centres. The head office is in Melbourne, Victoria.
-        Melbourne Watch Gallery has been in operation for two years and has an
-        extensive range of smartwatches and sports trackers to sell.
-      </h3>
+    <div class = 'management_content'>
+      <div class="management_list">
+        <div class="management_item management_item_title">
+          <div class="management_id management_title">Product ID</div>
+          <div class="management_img management_title">
+            Image
+          </div>
+          <div class="management_name management_title">Prodcut Name</div>
+          <div class="management_price management_title">Price</div>
+          <div class="management_action management_action_title ">Actions</div>
+        </div>
+        <?php
+          $conn=mysqli_connect("localhost","Ben","","melbourne_watch_gallery");
+          // Check connection
+          if (mysqli_connect_errno())
+          {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+          }
+
+          $result = mysqli_query($conn,"SELECT * FROM products");
+          while($row = mysqli_fetch_array($result))
+          {
+            // echo $row['product_name'] . " " . $row['price'];
+            // echo "<br />";
+            $name = $row["product_name"];
+            $price = $row["price"];
+            $img = $row["image_1"];
+            $id = $row["product_id"];
+            $text = <<<EOT
+              <div class="management_item">
+                <div class="management_id">$id</div>
+                <div class="management_img">
+                  <img 
+                    src="$img" 
+                    alt="image for product $id"
+                  >
+                </div>
+                <div class="management_name">$name</div>
+                <div class="management_price">$price</div>
+                <div class="management_action">Edit, Delete, Preview</div>
+              </div>
+              EOT;
+            echo $text;
+          }
+
+          mysqli_close($conn);
+        ?>
+        
+      </div>
     </div>
   </body>
 </html>

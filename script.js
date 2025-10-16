@@ -53,7 +53,7 @@ const productList = [
   {id: "6", name: "Huawei Watch GT 5 Pro 46mm Titanium Case GPS + goodle",image: "https://www.jbhifi.com.au/cdn/shop/files/792215-Product-0-I-638675180408414794.jpg?v=1731921316", price:599},
 ];
 
-// get cart information from localStorage
+// get cart information from localStorage. return an object.
 function getCartStorage(){
 
   const cartList = JSON.parse (localStorage.getItem ("cart_list"));
@@ -139,77 +139,77 @@ function updateCartListDisplay(cartList) {
 
 function initialProuctPage() {
 
-  // Get the full query string part from the URL
-  const queryString = window.location.search; 
-  const params = new URLSearchParams(queryString);
-  const productId = params.get("product_id"); 
+  // // Get the full query string part from the URL
+  // const queryString = window.location.search; 
+  // const params = new URLSearchParams(queryString);
+  // const productId = params.get("product_id"); 
 
-  // Setup product page
-  document.querySelector(".product_images").innerHTML = 
-  `
-    <div class="product_images_big">
-      <img 
-        class="product_images_big_img"
-        src="${productList.find(product => product.id === productId).image}" 
-        alt="${productId}"
-      >
-    </div>
-    <div  class="product_images_list">
-      <img 
-        class="product_images_small"
-        src="${productList.find(product => product.id === productId).thumb1}" 
-        alt="${productId}"
-      >
-      <img 
-        class="product_images_small"
-        src="${productList.find(product => product.id === productId).thumb2}" 
-        alt="${productId}"
-      >
-      <img 
-        class="product_images_small"
-        src="${productList.find(product => product.id === productId).thumb3}" 
-        alt="${productId}"
-      >
-      <img 
-        class="product_images_small"
-        src="${productList.find(product => product.id === productId).thumb4}" 
-        alt="${productId}"
-      >
-    </div>
-  `
-  document.querySelector(".product_des").innerHTML = 
-  `
-    <div class="product_des_title">
-      ${productList.find(product => product.id === productId).name}
-    </div>
-    <div class="product_des_model">
-      ${productList.find(product => product.id === productId).model}
-    </div>
-    <div class="product_des_price">
-      $${productList.find(product => product.id === productId).price}
-    </div>
-    <button class="product_des_add" onclick="addItem('${productId}')">
-      Add to Cart
-    </button>
-    <div class="product_des_overview">
-      Product Overview
-    </div>
-    <div class="product_des_des">
-      ${productList.find(product => product.id === productId).overview}
-    </div>
-  `
+  // // Setup product page
+  // document.querySelector(".product_images").innerHTML = 
+  // `
+  //   <div class="product_images_big">
+  //     <img 
+  //       class="product_images_big_img"
+  //       src="${productList.find(product => product.id === productId).image}" 
+  //       alt="${productId}"
+  //     >
+  //   </div>
+  //   <div  class="product_images_list">
+  //     <img 
+  //       class="product_images_small"
+  //       src="${productList.find(product => product.id === productId).thumb1}" 
+  //       alt="${productId}"
+  //     >
+  //     <img 
+  //       class="product_images_small"
+  //       src="${productList.find(product => product.id === productId).thumb2}" 
+  //       alt="${productId}"
+  //     >
+  //     <img 
+  //       class="product_images_small"
+  //       src="${productList.find(product => product.id === productId).thumb3}" 
+  //       alt="${productId}"
+  //     >
+  //     <img 
+  //       class="product_images_small"
+  //       src="${productList.find(product => product.id === productId).thumb4}" 
+  //       alt="${productId}"
+  //     >
+  //   </div>
+  // `
+  // document.querySelector(".product_des").innerHTML = 
+  // `
+  //   <div class="product_des_title">
+  //     ${productList.find(product => product.id === productId).name}
+  //   </div>
+  //   <div class="product_des_model">
+  //     ${productList.find(product => product.id === productId).model}
+  //   </div>
+  //   <div class="product_des_price">
+  //     $${productList.find(product => product.id === productId).price}
+  //   </div>
+  //   <button class="product_des_add" onclick="addItem('${productId}')">
+  //     Add to Cart
+  //   </button>
+  //   <div class="product_des_overview">
+  //     Product Overview
+  //   </div>
+  //   <div class="product_des_des">
+  //     ${productList.find(product => product.id === productId).overview}
+  //   </div>
+  // `
 
-  // Get the main image element
-  const mainImage = document.querySelector(".product_images_big_img");
+  // // Get the main image element
+  // const mainImage = document.querySelector(".product_images_big_img");
 
-  // Get all thumbnails
-  const thumbnails = document.querySelectorAll(".product_images_small");
+  // // Get all thumbnails
+  // const thumbnails = document.querySelectorAll(".product_images_small");
 
-  // Add mouseover event to each thumbnail
-  thumbnails.forEach(thumbnail => {
-    thumbnail.addEventListener("mouseover", () => {
-      mainImage.src = thumbnail.src; // Change main image
-    });
-  });
+  // // Add mouseover event to each thumbnail
+  // thumbnails.forEach(thumbnail => {
+  //   thumbnail.addEventListener("mouseover", () => {
+  //     mainImage.src = thumbnail.src; // Change main image
+  //   });
+  // });
 
 }

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,12 +19,17 @@
     ></script>
     <script src="script.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        let cart = getCartStorage ();
-        if (cart) {
-          updateCartDisplay (cart);
-        }
-      });
+      // document.addEventListener("DOMContentLoaded", () => {
+      //   let cart = getCartStorage ();
+      //   if (cart) {
+      //     updateCartDisplay (cart);
+      //   }
+      // });
+
+      const cart = localStorage.getItem ("cart_list");
+      if (cartList) {
+        window.location.href = "home.php?cart=" + cart;
+      }
     </script>
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="home.css" />
@@ -33,7 +40,7 @@
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="home.html">Melbourne Watch Gallery</a>
+        <a class="navbar-brand" href="home.php">Melbourne Watch Gallery</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -48,10 +55,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
+              <a class="nav-link" href="about.php">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.html">Product Management</a>
+              <a class="nav-link" href="product_management.php">Product Management</a>
             </li>
           </ul>
           <form class="d-flex" role="search">
@@ -82,6 +89,48 @@
     <!-- Home Content -->
     <div class="home_content">
       <div class="product_list">
+        <?php
+          $conn=mysqli_connect("localhost","Ben","","melbourne_watch_gallery");
+          // Check connection
+          if (mysqli_connect_errno())
+          {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+          }
+
+          $result = mysqli_query($conn,"SELECT * FROM products");
+          while($row = mysqli_fetch_array($result))
+          {
+            // echo $row['product_name'] . " " . $row['price'];
+            // echo "<br />";
+            $name = $row["product_name"];
+            $price = $row["price"];
+            $img = $row["image_1"];
+            $id = $row["product_id"];
+            $text = <<<EOT
+              <div class="product_item">
+                <a class="item_context" href="product.php?product_id=$id">
+                  <h5>$name</h5>
+                  <img 
+                    class="item_img"
+                    src="$img"
+                    alt="garmin-vivoactive-5-smart-watch-black-slate"
+                  >
+                </a>
+                <div class="item_bottom">
+                  <div class="item_price">$$price</div>
+                  <button class="item_add" onclick="addItem('$id')">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+              EOT;
+            echo $text;
+          }
+
+          mysqli_close($conn);
+        ?>
+
+        <!-- 
         <div class="product_item">
           <a class="item_context" href="product.html?product_id=1">
             <h5>Garmin vivoactive 5 (Black/Slate) 44mm domn Band</h5>
@@ -177,14 +226,29 @@
               Add to Cart
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
+
       <!-- shopping_cart -->
       <div class="shopping_cart">
         <div class="cart_title">
            Shopping Cart
         </div>
         <div class="cart_list" id="cart_list">
+          <?php
+            $cart = $_GET['cart'];
+            if ($cart){
+              $conn = mysqli_connect ("localhost","Ben","","melbourne_watch_gallery");
+              // Check connection
+              if (mysqli_connect_errno())
+              {
+                echo "Failed to connect to MySQL: " . mysqli_connect_error();
+              }else{
+                // Select item according to cart list
+              }
+            }
+           
+          ?>
         </div>
         <div class="cart_bottom">
           <div class="cart_bottom_text">

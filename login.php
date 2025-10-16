@@ -15,25 +15,15 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
-    <script src="script.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        console.log ("addEventListener => DOMContentLoade");
-        const cart = getCartStorage ();
-        if (cart) updateCartDisplay (cart);
-        initialProuctPage ();
-      });
-    </script>
     <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="product.css" />
-    <link rel="stylesheet" href="cart.css" />
+    <link rel="stylesheet" href="login.css" />
     <title>Melbourne Watch Gallery</title>
   </head>
   <body>
     <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="home.html">Melbourne Watch Gallery</a>
+        <a class="navbar-brand" href="home.php">Melbourne Watch Gallery</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -48,10 +38,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
+              <a class="nav-link" href="about.php">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.html">Product Management</a>
+              <a class="nav-link" href="login.php">Product Management</a>
             </li>
           </ul>
           <form class="d-flex" role="search">
@@ -78,34 +68,22 @@
       />
       <h1>Melbourne Watch Gallery</h1>
     </div>
-    
-    <!-- Product detail -->
-    <div class="product_content">
-      <div class="product_images">
-
-      </div>
-      <div class="product_des">
-        
-      </div>
-
-      <!-- shopping_cart -->
-      <div class="shopping_cart">
-        <div class="cart_title">
-           Shopping Cart
+    <div class = 'login_content'>
+      <form class="login_form" action="login.html">
+        <div  class="single_block">
+          <label for="Username">Username</label>
+          <input class="login_input" type="text" id="Username" />
         </div>
-        <div class="cart_list" id="cart_list">
+        <div class="single_block">
+          <label for="password">Password</label>
+          <input class="login_input" type="password" id="password" />
         </div>
-        <div class="cart_bottom">
-          <div class="cart_bottom_text">
-            <p>Total</p>
-            <p id="total_price">$0</p>
-          </div>
-          <div class="cart_bottom_checkout">
-            <div>Check out</div>
-            <div class="cart_bottom_checkout_number" id="checkout_number">3</div>
-          </div>
+        <div class="single_block">
+          <button class="login_button">
+            Login
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   </body>
 </html>
