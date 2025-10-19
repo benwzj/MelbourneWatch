@@ -53,37 +53,51 @@ const productList = [
   {id: "6", name: "Huawei Watch GT 5 Pro 46mm Titanium Case GPS + goodle",image: "https://www.jbhifi.com.au/cdn/shop/files/792215-Product-0-I-638675180408414794.jpg?v=1731921316", price:599},
 ];
 
-// get cart information from localStorage. return an object.
+// Cart struction:
+// [
+//   {id: 1, name: '', price: 1, image: ''},
+//   ...
+// ]
+
+// get cart information from localStorage. return cart list.
 function getCartStorage(){
 
-  const cartList = JSON.parse (localStorage.getItem ("cart_list"));
-  if (!cartList) {
-    // Requirement: e.Include at least 3 products in the shopping cart
-    localStorage.setItem ("cart_list", JSON.stringify(['1','2','2']));
+  let cart = JSON.parse (localStorage.getItem ("cart"));
+  //console.log ("getCartStorage: " + JSON.stringify(cart));
+
+  if (!cart) {
+    cart = [];
+    localStorage.setItem ("cart", JSON.stringify([]));
   }
+  return cart;
 
   // const totalPrice = cartList.reduce((sum, item) => sum + item.price, 0) ?? 0;
-  const totalPrice = cartList.reduce(
-    (sum, item) => sum + productList.find(p=>p.id === item).price, 0
-  ) ?? 0;
+  // const totalPrice = cartList.reduce(
+  //   (sum, item) => sum + productList.find(p=>p.id === item).price, 0
+  // ) ?? 0;
 
-  const checkoutNumber = cartList.length;
+  // const checkoutNumber = cartList.length;
 
-  return {cartList, totalPrice, checkoutNumber};
+  // return {cartList, totalPrice, checkoutNumber};
 }
 
 // set cart information to localStorage
 function setCartStorage(cart){
-  localStorage.setItem ("cart_list", JSON.stringify(cart.cartList));
+  localStorage.setItem ("cart", JSON.stringify(cart));
 }
 
-function addItem(productId) {
+function addItem(product) {
 
   const cart = getCartStorage ();
-
-  cart.cartList.push (productId);
-  cart.totalPrice += productList.find (product => product.id === productId).price;
-  cart.checkoutNumber += 1;
+  //console.log ("addItem(product): " + JSON.stringify(product));
+  // cart.push (JSON.parse(product));
+  const converted_product = {...product};
+  converted_product.id = Number(converted_product.id);
+  converted_product.price = Number(converted_product.price);
+  //console.log ("converted_product: " + JSON.stringify(converted_product));
+  cart.push (converted_product);
+  // cart.totalPrice += productList.find (product => product.id === productId).price;
+  // cart.checkoutNumber += 1;
 
   setCartStorage (cart);
 
@@ -94,10 +108,11 @@ function addItem(productId) {
 function delItemByCartId (cartId){
 
   const cart = getCartStorage ();
+  cart.splice (cartId, 1);
 
-  cart.totalPrice -= productList.find(product => product.id === cart.cartList[cartId]).price;
-  cart.cartList.splice (cartId, 1);
-  cart.checkoutNumber -= 1;
+  // cart.totalPrice -= productList.find(product => product.id === cart.cartList[cartId]).price;
+  // cart.cartList.splice (cartId, 1);
+  // cart.checkoutNumber -= 1;
   setCartStorage (cart);
 
   updateCartDisplay (cart);
@@ -105,38 +120,43 @@ function delItemByCartId (cartId){
 
 function updateCartDisplay(cart) {
 
-  // Update Cart
-  updateCartListDisplay (cart.cartList); 
-  document.getElementById("checkout_number").innerHTML = cart.checkoutNumber;
-  document.getElementById("total_price").innerHTML = '$' + cart.totalPrice;
+  // Update Cart list
+  updateCartListDisplay (cart); 
+  // update the displayed Checkout number
+  document.getElementById("checkout_number").innerHTML = cart.length;
+  // update the total price
+  const totalPrice = cart.reduce ((tp,prod)=>prod.price + tp, 0);
+  document.getElementById("total_price").innerHTML = '$' + totalPrice;
 }
 
-function updateCartListDisplay(cartList) {
+function updateCartListDisplay(cart) {
   let cartListHtml = '';
   let cartId = 0;
 
   // Update Cart list
-  for (const productId of cartList) {
+  for (const product of cart) {
     cartListHtml += `
       <div class="cart_item">
         <div class="cart_item_img">
           <img 
-            src="${productList.find(product => product.id === productId).image}" 
+            src="${product.image}" 
             alt="apple watch"
           >
         </div>
         <div class="cart_item_content">
-          <div>${productList.find(product => product.id === productId).name}</div> 
+          <div>${product.name}</div> 
           <button class="cart_item_remove" onclick="delItemByCartId(${cartId})">Remove</button>
         </div>
-        <div class="cart_item_price">$${productList.find(product => product.id === productId).price}</div>
+        <div class="cart_item_price">$${product.price}</div>
       </div>
     `;
     cartId ++;
   }
   document.querySelector(".cart_list").innerHTML = cartListHtml;
 }
-
+function cartCheckout(){
+  window.location.href = "/melbournewatch/login.php";
+}
 function initialProuctPage() {
 
   // // Get the full query string part from the URL

@@ -34,14 +34,9 @@
       <h1>Melbourne Watch Gallery</h1>
     </div>
 
-    <div class="m-5">
-      <h3>
-        Melbourne Watch Gallery is a retail company that sells smartwatches and
-        sports trackers. Melbourne Watch Gallery has stores in major Melbourne
-        and Sydney shopping centres. The head office is in Melbourne, Victoria.
-        Melbourne Watch Gallery has been in operation for two years and has an
-        extensive range of smartwatches and sports trackers to sell.
-      </h3>
+    <!-- content -->
+    <div>
+      Coming Soon!
     </div>
   </body>
 </html>

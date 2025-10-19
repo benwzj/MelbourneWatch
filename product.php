@@ -19,8 +19,8 @@
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // console.log ("addEventListener => DOMContentLoade");
-        // const cart = getCartStorage ();
-        // if (cart) updateCartDisplay (cart);
+        const cart = getCartStorage ();
+        if (cart) updateCartDisplay (cart);
         //initialProuctPage ();
 
         // Get the main image element
@@ -44,43 +44,9 @@
   </head>
   <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="home.php">Melbourne Watch Gallery</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="about.php">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.php">Product Management</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
-      </div>
-    </nav>
+    <?php
+      include("navbar.php");
+    ?>
 
     <!-- Header -->
     <div class="header">
@@ -96,12 +62,7 @@
     <div class="product_content">
       <?php
           $productId = $_GET['product_id'];
-          $conn=mysqli_connect("localhost","Ben","","melbourne_watch_gallery");
-          // Check connection
-          if (mysqli_connect_errno())
-          {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-          }
+          include("dbconn.php");
 
           $result = mysqli_query($conn,"SELECT * FROM products WHERE product_id=".$productId);
           while($row = mysqli_fetch_array($result))
@@ -116,6 +77,12 @@
             $img4 = $row["image_4"];
             $overview = $row["overview"];
             $modelNo = $row["model_no"];
+            $array = [];
+            $array["price"] = $price;
+            $array["image"] = $img1;
+            $array["id"] = $productId; 
+            $array["name"] = $name;
+            $product = json_encode($array);
 
             $text = <<<EOT
               <div class="product_images">
@@ -159,7 +126,7 @@
                 <div class="product_des_price">
                   $$price
                 </div>
-                <button class="product_des_add" onclick="addItem('$productId')">
+                <button class="product_des_add" onclick='addItem($product)'>
                   Add to Cart
                 </button>
                 <div class="product_des_overview">
@@ -178,24 +145,9 @@
 
 
       <!-- shopping_cart -->
-      <div class="shopping_cart">
-        <div class="cart_title">
-           Shopping Cart
-        </div>
-        <div class="cart_list" id="cart_list">
-          
-        </div>
-        <div class="cart_bottom">
-          <div class="cart_bottom_text">
-            <p>Total</p>
-            <p id="total_price">$0</p>
-          </div>
-          <div class="cart_bottom_checkout">
-            <div>Check out</div>
-            <div class="cart_bottom_checkout_number" id="checkout_number">3</div>
-          </div>
-        </div>
-      </div>
+      <?php
+        include("cart.php");
+      ?>
     </div>
   </body>
 </html>

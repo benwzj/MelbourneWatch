@@ -19,17 +19,13 @@
     ></script>
     <script src="script.js"></script>
     <script>
-      // document.addEventListener("DOMContentLoaded", () => {
-      //   let cart = getCartStorage ();
-      //   if (cart) {
-      //     updateCartDisplay (cart);
-      //   }
-      // });
+      document.addEventListener("DOMContentLoaded", () => {
+        let cart = getCartStorage ();
+        if (cart) {
+          updateCartDisplay (cart);
+        }
+      });
 
-      const cart = localStorage.getItem ("cart_list");
-      if (cartList) {
-        window.location.href = "home.php?cart=" + cart;
-      }
     </script>
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="home.css" />
@@ -38,43 +34,9 @@
   </head>
   <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="home.php">Melbourne Watch Gallery</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="about.php">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="product_management.php">Product Management</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
-      </div>
-    </nav>
+    <?php
+      include("navbar.php");
+    ?>
 
     <!-- Header -->
     <div class="header">
@@ -90,24 +52,22 @@
     <div class="home_content">
       <div class="product_list">
         <?php
-          $conn=mysqli_connect("localhost","Ben","","melbourne_watch_gallery");
-          // Check connection
-          if (mysqli_connect_errno())
-          {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-          }
-
+          include("dbconn.php");
           $result = mysqli_query($conn,"SELECT * FROM products");
           while($row = mysqli_fetch_array($result))
           {
-            // echo $row['product_name'] . " " . $row['price'];
-            // echo "<br />";
             $name = $row["product_name"];
             $price = $row["price"];
             $img = $row["image_1"];
             $id = $row["product_id"];
+            $array = [];
+            $array["price"] = $price;
+            $array["image"] = $img;
+            $array["id"] = $id; 
+            $array["name"] = $name;
+            $product = json_encode($array);
             $text = <<<EOT
-              <div class="product_item">
+              <div class="product_item"> 
                 <a class="item_context" href="product.php?product_id=$id">
                   <h5>$name</h5>
                   <img 
@@ -118,12 +78,12 @@
                 </a>
                 <div class="item_bottom">
                   <div class="item_price">$$price</div>
-                  <button class="item_add" onclick="addItem('$id')">
+                  <button class="item_add" onclick='addItem($product)'>
                     Add to Cart
                   </button>
                 </div>
               </div>
-              EOT;
+            EOT;
             echo $text;
           }
 
@@ -235,30 +195,17 @@
            Shopping Cart
         </div>
         <div class="cart_list" id="cart_list">
-          <?php
-            $cart = $_GET['cart'];
-            if ($cart){
-              $conn = mysqli_connect ("localhost","Ben","","melbourne_watch_gallery");
-              // Check connection
-              if (mysqli_connect_errno())
-              {
-                echo "Failed to connect to MySQL: " . mysqli_connect_error();
-              }else{
-                // Select item according to cart list
-              }
-            }
-           
-          ?>
+      
         </div>
         <div class="cart_bottom">
           <div class="cart_bottom_text">
             <p>Total</p>
             <p id="total_price">$0</p>
           </div>
-          <div class="cart_bottom_checkout">
+          <button class="cart_bottom_checkout" onclick="cartCheckout()">
             <div>Check out</div>
             <div class="cart_bottom_checkout_number" id="checkout_number">3</div>
-          </div>
+          </button>
         </div>
       </div>
     </div>

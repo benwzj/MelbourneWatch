@@ -88,6 +88,8 @@
   border-radius: 5px;
   background-color: rgb(3, 170, 3);
   color: aliceblue;
+  /* border: 4px solid rgb(240, 59, 8); */
+  border: none;
 }
 .cart_bottom_checkout_number{
   display: flex;

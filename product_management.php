@@ -21,44 +21,9 @@
   </head>
   <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="home.html">Melbourne Watch Gallery</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.html">Product Management</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
-      </div>
-    </nav>
-
+    <?php
+      include("navbar.php");
+    ?>
     <!-- Header -->
     <div class="header">
       <img
@@ -70,53 +35,59 @@
     </div>
 
     <div class = 'management_content'>
-      <div class="management_list">
-        <div class="management_item management_item_title">
-          <div class="management_id management_title">Product ID</div>
-          <div class="management_img management_title">
-            Image
-          </div>
-          <div class="management_name management_title">Prodcut Name</div>
-          <div class="management_price management_title">Price</div>
-          <div class="management_action management_action_title ">Actions</div>
+      <div class = 'management_list'>
+       <h2 class="management_title">Product Management System</h2>
+        <div class="table-responsive-md"> 
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product ID</th>
+                <th scope="col">Image</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+                include("dbconn.php");
+
+                $result = mysqli_query($conn,"SELECT * FROM products");
+                while($row = mysqli_fetch_array($result))
+                {
+                  // echo $row['product_name'] . " " . $row['price'];
+                  // echo "<br />";
+                  $name = $row["product_name"];
+                  $price = $row["price"];
+                  $img = $row["image_1"];
+                  $id = $row["product_id"];
+                  $text = <<<EOT
+                    <tr>
+                      <th scope="row"> $id</th>
+                      <td>
+                        <img 
+                          class="management_img"
+                          src="$img" 
+                          alt="image for product $id"
+                        >
+                      </td>
+                      <td>$name</td>
+                      <td>$price</td>
+                      <td>
+                        <a href="edit.php?product_id=$id">Edit</a>,
+                        <a href="delete.php?product_id=$id">Delete</a>,
+                        <a href="product.php?product_id=$id">Preview</a>
+                      </td>
+                    </tr>
+                  EOT;
+                  echo $text;
+                }
+                mysqli_close($conn);
+              ?>         
+            </tbody>
+
+          </table>
         </div>
-        <?php
-          $conn=mysqli_connect("localhost","Ben","","melbourne_watch_gallery");
-          // Check connection
-          if (mysqli_connect_errno())
-          {
-            echo "Failed to connect to MySQL: " . mysqli_connect_error();
-          }
-
-          $result = mysqli_query($conn,"SELECT * FROM products");
-          while($row = mysqli_fetch_array($result))
-          {
-            // echo $row['product_name'] . " " . $row['price'];
-            // echo "<br />";
-            $name = $row["product_name"];
-            $price = $row["price"];
-            $img = $row["image_1"];
-            $id = $row["product_id"];
-            $text = <<<EOT
-              <div class="management_item">
-                <div class="management_id">$id</div>
-                <div class="management_img">
-                  <img 
-                    src="$img" 
-                    alt="image for product $id"
-                  >
-                </div>
-                <div class="management_name">$name</div>
-                <div class="management_price">$price</div>
-                <div class="management_action">Edit, Delete, Preview</div>
-              </div>
-              EOT;
-            echo $text;
-          }
-
-          mysqli_close($conn);
-        ?>
-        
       </div>
     </div>
   </body>

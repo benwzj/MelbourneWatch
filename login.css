@@ -41,3 +41,6 @@
   border: 1px solid grey;
   box-sizing: border-box;
 }
+.login_error{
+  color: red;
+}
