@@ -24,7 +24,7 @@
             $username = $_SESSION["username"];
             echo "  
               <li class='nav-item'>
-                <a class='nav-link' href='product_management.php'>Product Management</a>
+                <a class='nav-link' href='management.php'>Product Management</a>
               </li>
               <li class='nav-item'>
                 <a class='nav-link' href='login.php'>Add New Product</a>

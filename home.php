@@ -89,125 +89,12 @@
 
           mysqli_close($conn);
         ?>
-
-        <!-- 
-        <div class="product_item">
-          <a class="item_context" href="product.html?product_id=1">
-            <h5>Garmin vivoactive 5 (Black/Slate) 44mm domn Band</h5>
-            <img 
-              class="item_img"
-              src="https://cdn.shopify.com/s/files/1/0024/9803/5810/products/665844-Product-0-I-638307609604535334_600x600.jpg?v=1695164595" 
-              alt="garmin-vivoactive-5-smart-watch-black-slate"
-            >
-          </a>
-          <div class="item_bottom">
-            <div class="item_price">$350</div>
-            <button class="item_add" onclick="addItem('1')">
-              Add to Cart
-            </button>
-          </div>
-        </div>
-        <div class="product_item">
-          <a class="item_context" href="product.html?product_id=2">
-            <h5>Apple Watch Ultra 49mm GPS + Cellular</h5>
-            <img 
-              class="item_img"
-              src="https://cdn.shopify.com/s/files/1/0024/9803/5810/files/663051-Product-0-I-638615422208592294_600x600.jpg?v=1725945498" 
-              alt="apple smart-watch-black-slate"
-            >
-          </a>
-          <div class="item_bottom">
-            <div class="item_price">$1259</div>
-            <button class="item_add" onclick="addItem('2')">
-              Add to Cart
-            </button>
-          </div>
-        </div>
-         <div class="product_item">
-          <a class="item_context" href="product.html?product_id=1">
-            <h5>Apple Watch Series 10 46mm GPS and Cellular Ocean Band </h5>
-            <img 
-              class="item_img"
-              src="https://www.jbhifi.com.au/cdn/shop/files/656226-Product-0-I-638615334006044870.jpg?v=1725937968" 
-              alt="apple watch ate"
-            >
-          </a>
-          <div class="item_bottom">
-            <div class="item_price">$1288</div>
-            <button class="item_add" onclick="addItem('3')">
-              Add to Cart
-            </button>
-          </div>
-        </div>
-         <div class="product_item">
-          <a class="item_context" href="product.html?product_id=2">
-            <h5>Apple Watch SE 40mm GPS + Cellular Golden Case</h5>
-            <img 
-              class="item_img"
-              src="https://www.jbhifi.com.au/cdn/shop/files/785301-Product-0-I-638615484605550148.jpg?v=1725965189" 
-              alt="apple watch"
-            >
-          </a>
-          <div class="item_bottom">
-            <div class="item_price">$355</div>
-            <button class="item_add" onclick="addItem('4')">
-              Add to Cart
-            </button>
-          </div>
-        </div>
-         <div class="product_item">
-          <a class="item_context" href="product.html?product_id=2">
-            <h5>Samsung Galaxy Watch7 LTE 44mm GPS + Cellular Red Band</h5>
-            <img 
-              class="item_img"
-              src="https://cdn.shopify.com/s/files/1/0024/9803/5810/files/754671-Product-0-I-638562494404549905_600x600.jpg?v=1720653615" 
-              alt="Samsung"
-            >
-          </a>
-          <div class="item_bottom">
-            <div class="item_price">$690</div>
-            <button class="item_add" onclick="addItem('5')">
-              Add to Cart
-            </button>
-          </div>
-        </div>
-         <div class="product_item">
-          <a class="item_context" href="product.html?product_id=1">
-            <h5>Huawei Watch GT 5 Pro 46mm Titanium Case GPS + goodle</h5>
-            <img 
-              class="item_img"
-              src="https://www.jbhifi.com.au/cdn/shop/files/792215-Product-0-I-638675180408414794.jpg?v=1731921316" 
-              alt="Huawei"
-            >
-          </a>
-          <div class="item_bottom">
-            <div class="item_price">$599</div>
-            <button class="item_add" onclick="addItem('6')">
-              Add to Cart
-            </button>
-          </div>
-        </div> -->
       </div>
 
       <!-- shopping_cart -->
-      <div class="shopping_cart">
-        <div class="cart_title">
-           Shopping Cart
-        </div>
-        <div class="cart_list" id="cart_list">
-      
-        </div>
-        <div class="cart_bottom">
-          <div class="cart_bottom_text">
-            <p>Total</p>
-            <p id="total_price">$0</p>
-          </div>
-          <button class="cart_bottom_checkout" onclick="cartCheckout()">
-            <div>Check out</div>
-            <div class="cart_bottom_checkout_number" id="checkout_number">3</div>
-          </button>
-        </div>
-      </div>
+      <?php
+        include("cart.php");
+      ?>
     </div>
   </body>
 </html>

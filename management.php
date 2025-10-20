@@ -16,7 +16,7 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="product_management.css" />
+    <link rel="stylesheet" href="management.css" />
     <title>Melbourne Watch Gallery</title>
   </head>
   <body>
