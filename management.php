@@ -34,9 +34,9 @@
       <h1>Melbourne Watch Gallery</h1>
     </div>
 
-    <div class = 'management_content'>
+    <div class = 'main_content'>
       <div class = 'management_list'>
-       <h2 class="management_title">Product Management System</h2>
+        <h2 class="management_title">Product Management System</h2>
         <div class="table-responsive-md"> 
           <table class="table">
             <thead>

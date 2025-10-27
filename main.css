@@ -21,3 +21,11 @@
   margin: 5xpx;
   border-radius: 5px;
 }
+
+.main_content{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}

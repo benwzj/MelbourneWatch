@@ -1,10 +1,4 @@
-.login_content{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-}
+
 .login_form{
   width: 60%;
   min-width: 360px;

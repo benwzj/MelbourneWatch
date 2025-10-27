@@ -27,7 +27,7 @@
                 <a class='nav-link' href='management.php'>Product Management</a>
               </li>
               <li class='nav-item'>
-                <a class='nav-link' href='login.php'>Add New Product</a>
+                <a class='nav-link' href='add.php'>Add New Product</a>
               </li>
               <li class='nav-item'>
                 <a class='nav-link' href='logout.php'>Logout</a>

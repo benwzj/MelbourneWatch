@@ -37,7 +37,7 @@
     <!-- edit content -->
     <div class="main_content">
       <div >
-        <h2>Product Management System</h2>
+        <h2>Product Management System - Add New Product</h2>
         <form 
           method="post" 
           action="add_action.php" 
@@ -124,12 +124,6 @@
           >
             Add New product
           </button>
-          <?php
-            extract($_GET);
-            if (isset($message)){
-              echo "<div class='login_error'>$message</div>";
-            }
-          ?>
         </form>
       </div>
     </div>

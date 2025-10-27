@@ -36,7 +36,7 @@
     </div>
 
     <!-- login content -->
-    <div class='login_content'>
+    <div class='main_content'>
       <form 
         method="post" 
         action="validatepassword.php" 
