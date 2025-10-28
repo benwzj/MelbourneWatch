@@ -1,3 +1,11 @@
+<?php
+  $product_id = $_GET['product_id'];
+  include("dbconn.php");
+
+  $result = mysqli_query($conn,"SELECT * FROM products WHERE product_id=".$product_id);
+  $row = mysqli_fetch_array($result);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,10 +45,10 @@
     <!-- edit content -->
     <div class="main_content">
       <div >
-        <h2>Product Management System</h2>
+        <h2 class="bottom_margin40">Product Management System - Edit product</h2>
         <form 
           method="post" 
-          action="add_action.php" 
+          action="edit_action.php" 
         >
           <div class="mb-3">
             <label for="product_name">Product Name</label>
@@ -49,7 +57,8 @@
               type="text" 
               id="product_name" 
               name="product_name" 
-              aria-describedby="emailHelp"
+              value="<?php echo $row["product_name"];?>"
+              required
             />
           </div>
           <div class="mb-3">
@@ -59,15 +68,19 @@
               type="text" 
               id="model_no" 
               name="model_no" 
+              value="<?php echo $row["model_no"];?>"
+              required
             />
           </div>
           <div class="mb-3">
             <label for="price">Price</label>
             <input 
               class="form-control" 
-              type="text" 
+              type="number"
               id="price" 
               name="price" 
+              value="<?php echo $row["price"];?>"
+              required
             />
           </div>
           <div class="mb-3">
@@ -77,9 +90,9 @@
               type="text" 
               id="overview" 
               name="overview" 
+              required
               rows=4
-            >
-            </textarea>
+            ><?php echo $row["overview"];?></textarea>
           </div>
           <div class="mb-3">
             <label for="image_1">Image 1</label>
@@ -88,6 +101,8 @@
               type="text" 
               id="image_1" 
               name="image_1" 
+              value="<?php echo $row["image_1"];?>"
+              required
             />
           </div>
           <div class="mb-3">
@@ -97,15 +112,19 @@
               type="text" 
               id="image_2" 
               name="image_2" 
+              value="<?php echo $row["image_2"];?>"
+              required
             />
           </div>
           <div class="mb-3">
-            <label for="overview">Image 3</label>
+            <label for="image_3">Image 3</label>
             <input 
               class="form-control" 
               type="text" 
               id="image_3" 
               name="image_3" 
+              value="<?php echo $row["image_3"];?>"
+              required
             />
           </div>
           <div class="mb-3">
@@ -115,21 +134,23 @@
               type="text" 
               id="image_4" 
               name="image_4" 
+              value="<?php echo $row["image_4"];?>"
+              required
             />
           </div>
-
+            <input 
+              class="form-control" 
+              type="hidden"
+              id="product_id" 
+              name="product_id" 
+              value="<?php echo $product_id;?>"
+            />
           <button 
             class="btn btn-primary"
             type="submit"
           >
-            Add New product
+            Save Change
           </button>
-          <?php
-            extract($_GET);
-            if (isset($message)){
-              echo "<div class='login_error'>$message</div>";
-            }
-          ?>
         </form>
       </div>
     </div>

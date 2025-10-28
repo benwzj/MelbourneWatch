@@ -37,7 +37,7 @@
     <!-- edit content -->
     <div class="main_content">
       <div >
-        <h2>Product Management System - Add New Product</h2>
+        <h2 class="bottom_margin40">Product Management System - Add New Product</h2>
         <form 
           method="post" 
           action="add_action.php" 
@@ -49,7 +49,7 @@
               type="text" 
               id="product_name" 
               name="product_name" 
-              aria-describedby="emailHelp"
+              required
             />
           </div>
           <div class="mb-3">
@@ -59,15 +59,17 @@
               type="text" 
               id="model_no" 
               name="model_no" 
+              required
             />
           </div>
           <div class="mb-3">
             <label for="price">Price</label>
             <input 
               class="form-control" 
-              type="text" 
+              type="number"
               id="price" 
               name="price" 
+              required
             />
           </div>
           <div class="mb-3">
@@ -77,6 +79,7 @@
               type="text" 
               id="overview" 
               name="overview" 
+              required
               rows=4
             >
             </textarea>
@@ -88,6 +91,7 @@
               type="text" 
               id="image_1" 
               name="image_1" 
+              required
             />
           </div>
           <div class="mb-3">
@@ -97,15 +101,17 @@
               type="text" 
               id="image_2" 
               name="image_2" 
+              required
             />
           </div>
           <div class="mb-3">
-            <label for="overview">Image 3</label>
+            <label for="image_3">Image 3</label>
             <input 
               class="form-control" 
               type="text" 
               id="image_3" 
               name="image_3" 
+              required
             />
           </div>
           <div class="mb-3">
@@ -115,6 +121,7 @@
               type="text" 
               id="image_4" 
               name="image_4" 
+              required
             />
           </div>
 

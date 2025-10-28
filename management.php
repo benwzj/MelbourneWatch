@@ -37,6 +37,15 @@
     <div class = 'main_content'>
       <div class = 'management_list'>
         <h2 class="management_title">Product Management System</h2>
+
+        <?php
+          extract($_GET);
+          if (isset($message)){
+            echo "
+              <div class='alert alert-primary' role='alert'>$message</div>
+            ";
+          }
+        ?>
         <div class="table-responsive-md"> 
           <table class="table">
             <thead>
